@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	* {
+		-webkit-tap-highlight-color: transparent;
+		touch-action: manipulation;
+	}
+
+	body {
+		font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+	}
+}
+
+/* Custom receipt serrated edge effect for the digital paper */
+.paper-edge-top {
+	background-image: radial-gradient(circle at 10px -4px, transparent 10px, #FFFDF9 11px);
+	background-size: 20px 16px;
+}
+
+/* Subtle scrollbar for ticket list when many items are added */
+.custom-scrollbar::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+	background: rgba(15, 23, 42, 0.06);
+	border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background: rgba(15, 23, 42, 0.25);
+	border-radius: 9999px;
+}
+.custom-scrollbar-dark::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+.custom-scrollbar-dark::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.04);
+	border-radius: 9999px;
+}
+.custom-scrollbar-dark::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 9999px;
+}
