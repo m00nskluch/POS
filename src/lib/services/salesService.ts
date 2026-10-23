@@ -8,46 +8,125 @@ import type {
 	SaleRecord
 } from '$lib/types/pos';
 
-const STORAGE_KEY_SALES = 'lavega_pos_ventas_v1';
-const STORAGE_KEY_SEEDED = 'lavega_pos_seeded_date_v1';
+const STORAGE_KEY_SALES = 'lavega_pos_ventas_v2';
+const STORAGE_KEY_SEEDED = 'lavega_pos_seeded_date_v2';
 
 /**
- * Catálogo oficial de productos fijos del local en La Vega.
- * Diseñado con códigos cortos y colores de alto contraste para memoria muscular.
+ * Catálogo oficial completo de productos del local en La Vega (46 productos).
+ * Tipado estricto con categorías ('empanada' | 'arepa' | 'bebida') y subcategorías
+ * para navegación táctil ultrarrápida y libre de errores de cobro.
  */
 export const CATALOGO_PRODUCTOS: Product[] = [
+	// ========================================================================
+	// A. CATEGORÍA: EMPANADAS — TRADICIONALES ($1.000 c/u)
+	// ========================================================================
+	{
+		id: 'emp-mechada',
+		name: 'Empanada Mechada',
+		shortName: 'Mechada',
+		subtitle: 'Carne desmechada criolla',
+		category: 'empanada',
+		subcategory: 'tradicional',
+		price: 1000,
+		colorKey: 'rose',
+		badgeCode: 'MEC',
+		emoji: '🥩'
+	},
+	{
+		id: 'emp-mechada-queso',
+		name: 'Empanada Mechada Queso',
+		shortName: 'Mechada Queso',
+		subtitle: 'Carne mechada con queso llanero',
+		category: 'empanada',
+		subcategory: 'tradicional',
+		price: 1000,
+		colorKey: 'rose',
+		badgeCode: 'M+Q',
+		emoji: '🧀'
+	},
+	{
+		id: 'emp-pollo',
+		name: 'Empanada Pollo',
+		shortName: 'Pollo',
+		subtitle: 'Pollo guisado desmechado',
+		category: 'empanada',
+		subcategory: 'tradicional',
+		price: 1000,
+		colorKey: 'amber',
+		badgeCode: 'POL',
+		emoji: '🍗'
+	},
+	{
+		id: 'emp-pollo-queso',
+		name: 'Empanada Pollo Queso',
+		shortName: 'Pollo Queso',
+		subtitle: 'Pollo desmechado con queso',
+		category: 'empanada',
+		subcategory: 'tradicional',
+		price: 1000,
+		colorKey: 'amber',
+		badgeCode: 'P+Q',
+		emoji: '🧀'
+	},
 	{
 		id: 'emp-pabellon',
 		name: 'Empanada Pabellón',
 		shortName: 'Pabellón',
 		subtitle: 'Mechada, caraotas, tajada y queso',
 		category: 'empanada',
-		price: 2500,
+		subcategory: 'tradicional',
+		price: 1000,
 		colorKey: 'amber',
 		badgeCode: 'PAB',
 		emoji: '🥟'
 	},
 	{
-		id: 'emp-mechada',
-		name: 'Empanada Mechada',
-		shortName: 'Mechada',
-		subtitle: 'Carne desmechada criolla jugosa',
+		id: 'emp-cordon-bleu',
+		name: 'Empanada Cordon Bleu',
+		shortName: 'Cordon Bleu',
+		subtitle: 'Pollo, jamón y queso fundido',
 		category: 'empanada',
-		price: 2500,
-		colorKey: 'rose',
-		badgeCode: 'MEC',
-		emoji: '🥩'
+		subcategory: 'tradicional',
+		price: 1000,
+		colorKey: 'orange',
+		badgeCode: 'CBL',
+		emoji: '🥓'
 	},
 	{
-		id: 'emp-queso',
-		name: 'Empanada Queso',
-		shortName: 'Queso',
-		subtitle: 'Full queso llanero derretido',
+		id: 'emp-molida',
+		name: 'Empanada Molida',
+		shortName: 'Molida',
+		subtitle: 'Carne molida sazonada',
 		category: 'empanada',
-		price: 2000,
-		colorKey: 'yellow',
-		badgeCode: 'QUE',
+		subcategory: 'tradicional',
+		price: 1000,
+		colorKey: 'rose',
+		badgeCode: 'MOL',
+		emoji: '🥟'
+	},
+	{
+		id: 'emp-molida-queso',
+		name: 'Empanada Molida Queso',
+		shortName: 'Molida Queso',
+		subtitle: 'Carne molida con queso',
+		category: 'empanada',
+		subcategory: 'tradicional',
+		price: 1000,
+		colorKey: 'rose',
+		badgeCode: 'MOQ',
 		emoji: '🧀'
+	},
+	{
+		id: 'emp-tocino-queso',
+		name: 'Empanada Tocino Queso',
+		shortName: 'Tocino Queso',
+		subtitle: 'Tocino ahumado y queso',
+		category: 'empanada',
+		subcategory: 'tradicional',
+		price: 1000,
+		colorKey: 'orange',
+		badgeCode: 'T+Q',
+		emoji: '🥓'
 	},
 	{
 		id: 'emp-domino',
@@ -55,32 +134,463 @@ export const CATALOGO_PRODUCTOS: Product[] = [
 		shortName: 'Dominó',
 		subtitle: 'Caraotas negras con queso blanco',
 		category: 'empanada',
-		price: 2200,
+		subcategory: 'tradicional',
+		price: 1000,
 		colorKey: 'indigo',
 		badgeCode: 'DOM',
 		emoji: '🫘'
 	},
 	{
+		id: 'emp-queso-llanero',
+		name: 'Empanada Queso Llanero',
+		shortName: 'Queso Llanero',
+		subtitle: 'Full queso llanero venezolano',
+		category: 'empanada',
+		subcategory: 'tradicional',
+		price: 1000,
+		colorKey: 'yellow',
+		badgeCode: 'QLL',
+		emoji: '🧀'
+	},
+	{
+		id: 'emp-platano-queso',
+		name: 'Empanada Plátano Queso',
+		shortName: 'Plátano Queso',
+		subtitle: 'Tajada de plátano maduro y queso',
+		category: 'empanada',
+		subcategory: 'tradicional',
+		price: 1000,
+		colorKey: 'yellow',
+		badgeCode: 'PLQ',
+		emoji: '🍌'
+	},
+	{
+		id: 'emp-chorizo-queso',
+		name: 'Empanada Chorizo Queso',
+		shortName: 'Chorizo Queso',
+		subtitle: 'Chorizo parrillero con queso',
+		category: 'empanada',
+		subcategory: 'tradicional',
+		price: 1000,
+		colorKey: 'orange',
+		badgeCode: 'CHQ',
+		emoji: '🌭'
+	},
+	{
+		id: 'emp-jamon-queso',
+		name: 'Empanada Jamón Queso',
+		shortName: 'Jamón Queso',
+		subtitle: 'Clásica de jamón y queso derretido',
+		category: 'empanada',
+		subcategory: 'tradicional',
+		price: 1000,
+		colorKey: 'yellow',
+		badgeCode: 'J+Q',
+		emoji: '🥪'
+	},
+
+	// ========================================================================
+	// A.2 CATEGORÍA: EMPANADAS — ESPECIALES ($2.000 - $3.000)
+	// ========================================================================
+	{
+		id: 'emp-trifasica',
+		name: 'Empanada Trifásica',
+		shortName: 'Trifásica',
+		subtitle: 'Especial 3 carnes + queso',
+		category: 'empanada',
+		subcategory: 'especial',
+		price: 2000,
+		colorKey: 'indigo',
+		badgeCode: 'ESP $2.000',
+		emoji: '⭐'
+	},
+	{
+		id: 'emp-cazon',
+		name: 'Empanada Cazón',
+		shortName: 'Cazón',
+		subtitle: 'Especial pescado cazón oriental',
+		category: 'empanada',
+		subcategory: 'especial',
+		price: 2500,
+		colorKey: 'cyan',
+		badgeCode: 'ESP $2.500',
+		emoji: '🦈'
+	},
+	{
+		id: 'emp-naiguatarena',
+		name: 'Empanada Naiguatareña',
+		shortName: 'Naiguatareña',
+		subtitle: 'Super especial de la costa',
+		category: 'empanada',
+		subcategory: 'especial',
+		price: 3000,
+		colorKey: 'rose',
+		badgeCode: 'ESP $3.000',
+		emoji: '👑'
+	},
+
+	// ========================================================================
+	// B. CATEGORÍA: AREPAS ($2.000 - $5.000)
+	// ========================================================================
+	{
+		id: 'are-desayuno-criollo',
+		name: 'Desayuno Criollo',
+		shortName: 'Desayuno Criollo',
+		subtitle: 'Arepa, carne, caraotas, huevo y queso',
+		category: 'arepa',
+		subcategory: 'arepa',
+		price: 5000,
+		colorKey: 'amber',
+		badgeCode: 'CRI',
+		emoji: '🍳'
+	},
+	{
+		id: 'are-pabellon',
+		name: 'Arepa Pabellón',
+		shortName: 'Arepa Pabellón',
+		subtitle: 'Mechada, caraotas, tajada y queso',
+		category: 'arepa',
+		subcategory: 'arepa',
+		price: 4500,
+		colorKey: 'rose',
+		badgeCode: 'PAB',
+		emoji: '🫓'
+	},
+	{
+		id: 'are-pelua',
+		name: 'Arepa Pelúa',
+		shortName: 'Arepa Pelúa',
+		subtitle: 'Carne mechada y queso amarillo rallado',
+		category: 'arepa',
+		subcategory: 'arepa',
+		price: 4000,
+		colorKey: 'orange',
+		badgeCode: 'PEL',
+		emoji: '🥩'
+	},
+	{
+		id: 'are-catira',
+		name: 'Arepa Catira',
+		shortName: 'Arepa Catira',
+		subtitle: 'Pollo desmechado y queso amarillo',
+		category: 'arepa',
+		subcategory: 'arepa',
+		price: 4000,
+		colorKey: 'yellow',
+		badgeCode: 'CAT',
+		emoji: '🍗'
+	},
+	{
+		id: 'are-reina-pepiada',
+		name: 'Arepa Reina Pepiada',
+		shortName: 'Reina Pepiada',
+		subtitle: 'Pollo, palta cremosa y mayonesa',
+		category: 'arepa',
+		subcategory: 'arepa',
+		price: 4000,
+		colorKey: 'emerald',
+		badgeCode: 'REI',
+		emoji: '🥑'
+	},
+	{
+		id: 'are-huevos-revueltos',
+		name: 'Arepa de Huevos Revueltos',
+		shortName: 'Huevos Revueltos',
+		subtitle: 'Perico venezolano con tomate y cebollín',
+		category: 'arepa',
+		subcategory: 'arepa',
+		price: 4000,
+		colorKey: 'amber',
+		badgeCode: 'HUE',
+		emoji: '🥚'
+	},
+	{
+		id: 'are-jamon-queso',
+		name: 'Arepa Jamón Queso',
+		shortName: 'Arepa Jamón Queso',
+		subtitle: 'Jamón seleccionado y abundante queso',
+		category: 'arepa',
+		subcategory: 'arepa',
+		price: 3500,
+		colorKey: 'yellow',
+		badgeCode: 'J+Q',
+		emoji: '🧀'
+	},
+	{
+		id: 'are-queso-llanero',
+		name: 'Arepa Queso Llanero',
+		shortName: 'Arepa Queso Llanero',
+		subtitle: 'Rellena de queso llanero tradicional',
+		category: 'arepa',
+		subcategory: 'arepa',
+		price: 3500,
+		colorKey: 'yellow',
+		badgeCode: 'QLL',
+		emoji: '🧀'
+	},
+	{
+		id: 'are-dulces',
+		name: 'Arepitas Dulces',
+		shortName: 'Arepitas Dulces',
+		subtitle: 'Con papelón y toque de anís',
+		category: 'arepa',
+		subcategory: 'arepa',
+		price: 2000,
+		colorKey: 'orange',
+		badgeCode: 'DUL',
+		emoji: '🍯'
+	},
+
+	// ========================================================================
+	// C.1 CATEGORÍA: BEBIDAS — GASEOSAS Y TRADICIONALES ($1.500 - $2.000)
+	// ========================================================================
+	{
 		id: 'beb-malta',
-		name: 'Malta Venezolana',
+		name: 'Malta',
 		shortName: 'Malta',
-		subtitle: 'Botella / Lata bien helada',
+		subtitle: 'Tradicional venezolana bien helada',
 		category: 'bebida',
-		price: 1500,
+		subcategory: 'refresco',
+		price: 2000,
 		colorKey: 'orange',
 		badgeCode: 'MAL',
 		emoji: '🍺'
 	},
 	{
-		id: 'beb-lata',
-		name: 'Bebida Lata',
-		shortName: 'Bebida Lata',
-		subtitle: 'Frescolita / Gaseosa 350ml',
+		id: 'beb-frescolita',
+		name: 'Frescolita',
+		shortName: 'Frescolita',
+		subtitle: 'Refresco venezolano original',
 		category: 'bebida',
-		price: 1200,
-		colorKey: 'cyan',
-		badgeCode: 'BEB',
+		subcategory: 'refresco',
+		price: 2000,
+		colorKey: 'rose',
+		badgeCode: 'FRE',
 		emoji: '🥤'
+	},
+	{
+		id: 'beb-papelon',
+		name: 'Papelón',
+		shortName: 'Papelón',
+		subtitle: 'Papelón con limón helado',
+		category: 'bebida',
+		subcategory: 'refresco',
+		price: 2000,
+		colorKey: 'amber',
+		badgeCode: 'PAP',
+		emoji: '🍋'
+	},
+	{
+		id: 'beb-coca-original',
+		name: 'Coca-Cola Original',
+		shortName: 'Coca-Cola Original',
+		subtitle: 'Formato individual 350ml',
+		category: 'bebida',
+		subcategory: 'refresco',
+		price: 1500,
+		colorKey: 'rose',
+		badgeCode: 'COC',
+		emoji: '🥤'
+	},
+	{
+		id: 'beb-coca-zero',
+		name: 'Coca-Cola Zero',
+		shortName: 'Coca-Cola Zero',
+		subtitle: 'Sin azúcar 350ml',
+		category: 'bebida',
+		subcategory: 'refresco',
+		price: 1500,
+		colorKey: 'indigo',
+		badgeCode: 'ZER',
+		emoji: '🥤'
+	},
+	{
+		id: 'beb-coca-doble-zero',
+		name: 'Coca-Cola Doble Zero',
+		shortName: 'Coca Doble Zero',
+		subtitle: 'Sin azúcar ni cafeína',
+		category: 'bebida',
+		subcategory: 'refresco',
+		price: 1500,
+		colorKey: 'amber',
+		badgeCode: '00Z',
+		emoji: '🥤'
+	},
+	{
+		id: 'beb-sprite',
+		name: 'Sprite',
+		shortName: 'Sprite',
+		subtitle: 'Lima-limón bien helada',
+		category: 'bebida',
+		subcategory: 'refresco',
+		price: 1500,
+		colorKey: 'emerald',
+		badgeCode: 'SPR',
+		emoji: '🫧'
+	},
+	{
+		id: 'beb-fanta',
+		name: 'Fanta',
+		shortName: 'Fanta',
+		subtitle: 'Sabor naranja helada',
+		category: 'bebida',
+		subcategory: 'refresco',
+		price: 1500,
+		colorKey: 'orange',
+		badgeCode: 'FAN',
+		emoji: '🍊'
+	},
+
+	// ========================================================================
+	// C.2 CATEGORÍA: BEBIDAS — FORMATOS GRANDES ($2.500 - $4.500)
+	// ========================================================================
+	{
+		id: 'beb-papelon-grande',
+		name: 'Papelón Grande',
+		shortName: 'Papelón Grande',
+		subtitle: 'Formato familiar / litro helado',
+		category: 'bebida',
+		subcategory: 'grande',
+		price: 4500,
+		colorKey: 'amber',
+		badgeCode: 'GRANDE',
+		emoji: '🫗'
+	},
+	{
+		id: 'beb-coca-grande',
+		name: 'Coca-Cola Grande',
+		shortName: 'Coca-Cola Grande',
+		subtitle: 'Formato grande para compartir',
+		category: 'bebida',
+		subcategory: 'grande',
+		price: 2500,
+		colorKey: 'rose',
+		badgeCode: 'GRANDE',
+		emoji: '🍾'
+	},
+
+	// ========================================================================
+	// C.3 CATEGORÍA: BEBIDAS — JUGOS NATURALES ($2.000 c/u)
+	// ========================================================================
+	{
+		id: 'jug-guanabana',
+		name: 'Jugo Guanábana',
+		shortName: 'Jugo Guanábana',
+		subtitle: 'Jugo natural 100% fruta',
+		category: 'bebida',
+		subcategory: 'jugo',
+		price: 2000,
+		colorKey: 'emerald',
+		badgeCode: 'JUG',
+		emoji: '🍈'
+	},
+	{
+		id: 'jug-guayaba',
+		name: 'Jugo Guayaba',
+		shortName: 'Jugo Guayaba',
+		subtitle: 'Jugo natural 100% fruta',
+		category: 'bebida',
+		subcategory: 'jugo',
+		price: 2000,
+		colorKey: 'rose',
+		badgeCode: 'JUG',
+		emoji: '🩷'
+	},
+	{
+		id: 'jug-tamarindo',
+		name: 'Jugo Tamarindo',
+		shortName: 'Jugo Tamarindo',
+		subtitle: 'Jugo natural 100% fruta',
+		category: 'bebida',
+		subcategory: 'jugo',
+		price: 2000,
+		colorKey: 'amber',
+		badgeCode: 'JUG',
+		emoji: '🤎'
+	},
+	{
+		id: 'jug-mora',
+		name: 'Jugo Mora',
+		shortName: 'Jugo Mora',
+		subtitle: 'Jugo natural 100% fruta',
+		category: 'bebida',
+		subcategory: 'jugo',
+		price: 2000,
+		colorKey: 'indigo',
+		badgeCode: 'JUG',
+		emoji: '🫐'
+	},
+	{
+		id: 'jug-maracuya',
+		name: 'Jugo Maracuyá',
+		shortName: 'Jugo Maracuyá',
+		subtitle: 'Jugo natural 100% fruta',
+		category: 'bebida',
+		subcategory: 'jugo',
+		price: 2000,
+		colorKey: 'yellow',
+		badgeCode: 'JUG',
+		emoji: '💛'
+	},
+	{
+		id: 'jug-pina',
+		name: 'Jugo Piña',
+		shortName: 'Jugo Piña',
+		subtitle: 'Jugo natural 100% fruta',
+		category: 'bebida',
+		subcategory: 'jugo',
+		price: 2000,
+		colorKey: 'yellow',
+		badgeCode: 'JUG',
+		emoji: '🍍'
+	},
+	{
+		id: 'jug-mango',
+		name: 'Jugo Mango',
+		shortName: 'Jugo Mango',
+		subtitle: 'Jugo natural 100% fruta',
+		category: 'bebida',
+		subcategory: 'jugo',
+		price: 2000,
+		colorKey: 'orange',
+		badgeCode: 'JUG',
+		emoji: '🥭'
+	},
+	{
+		id: 'jug-frutilla',
+		name: 'Jugo Frutilla',
+		shortName: 'Jugo Frutilla',
+		subtitle: 'Jugo natural 100% fruta',
+		category: 'bebida',
+		subcategory: 'jugo',
+		price: 2000,
+		colorKey: 'rose',
+		badgeCode: 'JUG',
+		emoji: '🍓'
+	},
+	{
+		id: 'jug-mandarina',
+		name: 'Jugo Mandarina',
+		shortName: 'Jugo Mandarina',
+		subtitle: 'Jugo natural 100% fruta',
+		category: 'bebida',
+		subcategory: 'jugo',
+		price: 2000,
+		colorKey: 'orange',
+		badgeCode: 'JUG',
+		emoji: '🍊'
+	},
+	{
+		id: 'jug-papaya',
+		name: 'Jugo Papaya',
+		shortName: 'Jugo Papaya',
+		subtitle: 'Jugo natural 100% fruta',
+		category: 'bebida',
+		subcategory: 'jugo',
+		price: 2000,
+		colorKey: 'amber',
+		badgeCode: 'JUG',
+		emoji: '🧡'
 	}
 ];
 
@@ -105,9 +615,8 @@ function getMondayOfWeek(date: Date): Date {
 }
 
 /**
- * Genera datos de prueba pre-cargados realistas para un puesto en La Vega Central.
- * Incluye ventas de la semana pasada, días previos de esta semana y ventas del día de hoy
- * distribuidas por horas pico (08:00 a hora actual) para probar el Dashboard de inmediato.
+ * Genera datos de prueba pre-cargados realistas para el puesto en La Vega Central,
+ * sincronizados con el nuevo menú completo de 46 productos (Empanadas, Arepas y Bebidas).
  */
 export function generarDatosSemillaLaVega(now: Date = new Date()): SaleRecord[] {
 	const sales: SaleRecord[] = [];
@@ -119,18 +628,23 @@ export function generarDatosSemillaLaVega(now: Date = new Date()): SaleRecord[] 
 		recipe: Array<{ id: string; qty: number }>,
 		cashPaid?: number
 	): SaleRecord => {
-		const items = recipe.map(({ id, qty }) => {
-			const prod = pMap.get(id)!;
-			return {
-				productId: prod.id,
-				name: prod.name,
-				shortName: prod.shortName,
-				category: prod.category,
-				quantity: qty,
-				unitPrice: prod.price,
-				subtotal: prod.price * qty
-			};
-		});
+		const items = recipe
+			.map(({ id, qty }) => {
+				const prod = pMap.get(id);
+				if (!prod) return null;
+				return {
+					productId: prod.id,
+					name: prod.name,
+					shortName: prod.shortName,
+					category: prod.category,
+					subcategory: prod.subcategory,
+					quantity: qty,
+					unitPrice: prod.price,
+					subtotal: prod.price * qty
+				};
+			})
+			.filter((it): it is NonNullable<typeof it> => it !== null);
+
 		const total = items.reduce((acc, it) => acc + it.subtotal, 0);
 		return {
 			id: `seed-${dateObj.getTime()}-${ticketNum}`,
@@ -144,52 +658,63 @@ export function generarDatosSemillaLaVega(now: Date = new Date()): SaleRecord[] 
 		};
 	};
 
-	// Patrones realistas de pedidos en La Vega (Pabellón y Mechada lideran, seguidos de Queso y Malta)
+	// Patrones realistas de pedidos en La Vega con productos reales del nuevo catálogo
 	const combos: Array<Array<{ id: string; qty: number }>> = [
 		[
-			{ id: 'emp-pabellon', qty: 2 },
+			{ id: 'emp-mechada', qty: 3 },
 			{ id: 'beb-malta', qty: 1 }
+		], // $5.000
+		[
+			{ id: 'emp-mechada-queso', qty: 2 },
+			{ id: 'emp-pabellon', qty: 2 },
+			{ id: 'jug-maracuya', qty: 2 }
+		], // $8.000
+		[
+			{ id: 'are-pabellon', qty: 1 },
+			{ id: 'beb-papelon', qty: 1 }
 		], // $6.500
 		[
-			{ id: 'emp-pabellon', qty: 1 },
+			{ id: 'emp-queso-llanero', qty: 2 },
+			{ id: 'emp-pollo-queso', qty: 2 },
+			{ id: 'beb-coca-original', qty: 2 }
+		], // $7.000
+		[
+			{ id: 'are-reina-pepiada', qty: 1 },
+			{ id: 'jug-guanabana', qty: 1 }
+		], // $6.000
+		[
 			{ id: 'emp-mechada', qty: 2 },
-			{ id: 'beb-malta', qty: 1 }
-		], // $9.000
+			{ id: 'emp-cazon', qty: 1 },
+			{ id: 'beb-malta', qty: 2 }
+		], // $8.500
 		[
-			{ id: 'emp-queso', qty: 2 },
-			{ id: 'beb-lata', qty: 2 }
-		], // $6.400
-		[
-			{ id: 'emp-pabellon', qty: 1 },
-			{ id: 'beb-malta', qty: 1 }
-		], // $4.000
-		[
-			{ id: 'emp-mechada', qty: 1 },
-			{ id: 'emp-domino', qty: 1 },
-			{ id: 'beb-lata', qty: 1 }
-		], // $5.900
-		[
-			{ id: 'emp-pabellon', qty: 3 },
-			{ id: 'emp-queso', qty: 2 },
-			{ id: 'beb-malta', qty: 3 }
-		], // $16.000 (familia)
-		[
-			{ id: 'emp-pabellon', qty: 1 },
-			{ id: 'emp-queso', qty: 1 }
-		], // $4.500
+			{ id: 'are-desayuno-criollo', qty: 1 },
+			{ id: 'jug-maracuya', qty: 1 }
+		], // $7.000
 		[
 			{ id: 'emp-domino', qty: 2 },
-			{ id: 'beb-malta', qty: 1 }
-		], // $5.900
+			{ id: 'emp-platano-queso', qty: 1 },
+			{ id: 'beb-frescolita', qty: 1 }
+		], // $5.000
 		[
+			{ id: 'emp-trifasica', qty: 1 },
 			{ id: 'emp-mechada', qty: 2 },
-			{ id: 'beb-lata', qty: 1 }
-		], // $6.200
+			{ id: 'beb-papelon-grande', qty: 1 }
+		], // $8.500
 		[
-			{ id: 'emp-pabellon', qty: 2 },
-			{ id: 'emp-mechada', qty: 1 },
-			{ id: 'beb-malta', qty: 2 }
-		] // $10.500
+			{ id: 'are-pelua', qty: 1 },
+			{ id: 'are-catira', qty: 1 },
+			{ id: 'beb-coca-grande', qty: 1 }
+		], // $10.500
+		[
+			{ id: 'emp-cordon-bleu', qty: 2 },
+			{ id: 'emp-jamon-queso', qty: 2 },
+			{ id: 'jug-mora', qty: 2 }
+		], // $8.000
+		[
+			{ id: 'emp-naiguatarena', qty: 1 },
+			{ id: 'beb-malta', qty: 1 }
+		] // $5.000
 	];
 
 	const mondayThisWeek = getMondayOfWeek(now);
@@ -237,7 +762,6 @@ export function generarDatosSemillaLaVega(now: Date = new Date()): SaleRecord[] 
 	}
 
 	// 3. Ventas de HOY distribuidas por horas para mostrar la curva de Horas Pico en La Vega
-	// Distribución por hora (07:00 a 16:00) con pico marcado entre las 11:00 y 13:00 hrs
 	const hourlyScheduleToday: Array<{ hour: number; ticketsCount: number }> = [
 		{ hour: 7, ticketsCount: 2 },
 		{ hour: 8, ticketsCount: 4 },
@@ -258,8 +782,8 @@ export function generarDatosSemillaLaVega(now: Date = new Date()): SaleRecord[] 
 
 			const combo = combos[(todayTicketCounter + slot.hour) % combos.length];
 			const tempTotal = combo.reduce((sum, item) => {
-				const p = pMap.get(item.id)!;
-				return sum + p.price * item.qty;
+				const p = pMap.get(item.id);
+				return sum + (p ? p.price * item.qty : 0);
 			}, 0);
 			const cashPaid = tempTotal <= 5000 ? 5000 : tempTotal <= 10000 ? 10000 : 20000;
 
@@ -321,9 +845,8 @@ export function guardarVentasEnStorage(sales: SaleRecord[]): void {
  * ============================================================================
  * CAPA DE SERVICIO LISTA PARA SUPABASE (Punto de inyección para Backend/Claude)
  * ============================================================================
- * Registra una nueva venta ("Pinchar Papel").
+ * Registra una nueva venta ("Pinchar Papel / Guardar Ticket").
  * Actualmente guarda en estado local + localStorage en 0ms.
- * Cuando se conecte Supabase, basta con descomentar el bloque async de inserción.
  */
 export async function registrarVenta(params: {
 	items: OrderItem[];
@@ -336,6 +859,7 @@ export async function registrarVenta(params: {
 		name: item.product.name,
 		shortName: item.product.shortName,
 		category: item.product.category,
+		subcategory: item.product.subcategory,
 		quantity: item.quantity,
 		unitPrice: item.product.price,
 		subtotal: item.subtotal
@@ -347,7 +871,10 @@ export async function registrarVenta(params: {
 	const changeGiven = Math.max(0, cashReceived - total);
 
 	const newSale: SaleRecord = {
-		id: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `sale-${Date.now()}`,
+		id:
+			typeof crypto !== 'undefined' && crypto.randomUUID
+				? crypto.randomUUID()
+				: `sale-${Date.now()}`,
 		ticketNumber: params.nextTicketNumber,
 		createdAt: now.toISOString(),
 		items: saleItems,
@@ -356,39 +883,6 @@ export async function registrarVenta(params: {
 		changeGiven,
 		syncedWithSupabase: false
 	};
-
-	/*
-	 * TODO [SUPABASE INTEGRATION - CLAUDE]:
-	 * Inyectar cliente Supabase aquí sin bloquear la UI (Optimistic UI):
-	 *
-	 * const { data, error } = await supabase
-	 *   .from('ventas')
-	 *   .insert({
-	 *     id: newSale.id,
-	 *     ticket_number: newSale.ticketNumber,
-	 *     created_at: newSale.createdAt,
-	 *     total_clp: newSale.total,
-	 *     efectivo_recibido: newSale.cashReceived,
-	 *     vuelto_clp: newSale.changeGiven
-	 *   })
-	 *   .select()
-	 *   .single();
-	 *
-	 * if (!error) {
-	 *   await supabase.from('detalle_ventas').insert(
-	 *     newSale.items.map((item) => ({
-	 *       venta_id: newSale.id,
-	 *       producto_id: item.productId,
-	 *       nombre_producto: item.name,
-	 *       categoria: item.category,
-	 *       cantidad: item.quantity,
-	 *       precio_unitario: item.unitPrice,
-	 *       subtotal: item.subtotal
-	 *     }))
-	 *   );
-	 *   newSale.syncedWithSupabase = true;
-	 * }
-	 */
 
 	return newSale;
 }
@@ -400,7 +894,7 @@ export async function registrarVenta(params: {
  * Procesa los registros de ventas y retorna todas las métricas listas para la Vista 2:
  * 1. Cierre de Caja (Hoy)
  * 2. Producto Estrella (Hoy y Esta Semana)
- * 3. Flujo por Hora (Horas Pico de 07:00 a 18:00)
+ * 3. Flujo por Hora (Horas Pico de 07:00 a 17:00)
  * 4. Comparativa Semanal (Esta Semana vs Semana Anterior)
  */
 export function obtenerMetricas(
@@ -442,12 +936,14 @@ export function obtenerMetricas(
 
 	let todayTotalUnits = 0;
 	let todayEmpanadasCount = 0;
+	let todayArepasCount = 0;
 	let todayBebidasCount = 0;
 
 	for (const sale of todaySales) {
 		for (const item of sale.items) {
 			todayTotalUnits += item.quantity;
 			if (item.category === 'empanada') todayEmpanadasCount += item.quantity;
+			else if (item.category === 'arepa') todayArepasCount += item.quantity;
 			else if (item.category === 'bebida') todayBebidasCount += item.quantity;
 		}
 	}
@@ -482,6 +978,7 @@ export function obtenerMetricas(
 					shortName: prod.shortName,
 					emoji: prod.emoji,
 					category: prod.category,
+					subcategory: prod.subcategory,
 					colorKey: prod.colorKey,
 					units: stats.units,
 					revenue: stats.revenue,
@@ -531,7 +1028,7 @@ export function obtenerMetricas(
 			bucket.tickets += 1;
 			bucket.revenue += sale.total;
 			bucket.empanadasUnits += sale.items
-				.filter((i) => i.category === 'empanada')
+				.filter((i) => i.category === 'empanada' || i.category === 'arepa')
 				.reduce((acc, i) => acc + i.quantity, 0);
 		}
 	}
@@ -606,6 +1103,7 @@ export function obtenerMetricas(
 		todayAverageTicket,
 		todayTotalUnits,
 		todayEmpanadasCount,
+		todayArepasCount,
 		todayBebidasCount,
 		starProductToday,
 		starProductWeek,

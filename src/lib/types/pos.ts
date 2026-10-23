@@ -1,6 +1,21 @@
-export type ProductCategory = 'empanada' | 'bebida';
+export type ProductCategory = 'empanada' | 'arepa' | 'bebida';
 
-export type ProductColorKey = 'amber' | 'rose' | 'yellow' | 'indigo' | 'orange' | 'cyan';
+export type ProductSubcategory =
+	| 'tradicional'
+	| 'especial'
+	| 'arepa'
+	| 'refresco'
+	| 'grande'
+	| 'jugo';
+
+export type ProductColorKey =
+	| 'amber'
+	| 'rose'
+	| 'yellow'
+	| 'indigo'
+	| 'orange'
+	| 'cyan'
+	| 'emerald';
 
 export interface Product {
 	id: string;
@@ -8,6 +23,7 @@ export interface Product {
 	shortName: string;
 	subtitle: string;
 	category: ProductCategory;
+	subcategory: ProductSubcategory;
 	price: number;
 	colorKey: ProductColorKey;
 	badgeCode: string;
@@ -25,6 +41,7 @@ export interface SaleItemRecord {
 	name: string;
 	shortName: string;
 	category: ProductCategory;
+	subcategory?: ProductSubcategory;
 	quantity: number;
 	unitPrice: number;
 	subtotal: number;
@@ -47,6 +64,7 @@ export interface ProductMetricItem {
 	shortName: string;
 	emoji: string;
 	category: ProductCategory;
+	subcategory: ProductSubcategory;
 	colorKey: ProductColorKey;
 	units: number;
 	revenue: number;
@@ -55,7 +73,7 @@ export interface ProductMetricItem {
 }
 
 export interface HourlyBucket {
-	hour: number; // 7 to 18
+	hour: number; // 7 to 17
 	label: string; // "08:00", "09:00", etc.
 	shortLabel: string; // "8h", "9h"
 	tickets: number;
@@ -92,6 +110,7 @@ export interface DashboardMetrics {
 	todayAverageTicket: number;
 	todayTotalUnits: number;
 	todayEmpanadasCount: number;
+	todayArepasCount: number;
 	todayBebidasCount: number;
 	starProductToday: ProductMetricItem | null;
 	starProductWeek: ProductMetricItem | null;
